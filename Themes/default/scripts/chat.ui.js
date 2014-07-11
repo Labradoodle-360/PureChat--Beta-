@@ -137,15 +137,12 @@ var ChatInterface = function()
 			case 'available':
 				$('#status_bar').attr('class', 'green');
 				break;
-
 			case 'busy':
 				$('#status_bar').attr('class', 'red');
 				break;
-
 			case 'away':
 				$('#status_bar').attr('class', 'orange');
 				break;
-
 			case 'invisible':
 				$('#status_bar').attr('class', 'silver');
 				break;
@@ -158,26 +155,20 @@ var ChatInterface = function()
 		{
 			$('#list_smilies').show(750);
 		});
+
 		$('#tag_image').click(function()
 		{
 			$('#list_irc').show(750);
-		});
-		$('#bbc_link').click(function()
-		{
-			$('#list_bbc').show(750);
 		});
 
 		$('#list_smilies').hover('', function()
 		{
 			$('#list_smilies').slideUp(300);
 		});
+
 		$('#list_irc').hover('', function()
 		{
 			$('#list_irc').slideUp(300);
-		});
-		$('#list_bbc').hover('', function()
-		{
-			$('#list_bbc').slideUp(300);
 		});
 
 		$(window).on('focus', function()
@@ -207,11 +198,7 @@ var ChatInterface = function()
 	{
 		$.each(pc_irc_commands, function(i, data)
 		{
-			$('#list_irc').append('<span id="' + data.id + '" title="' + data.name + ' - ' + data.command + '">' + (data.img != null ? '<img src="' + data.img + '" alt="" /> ' : '') + data.name + '</span>');
-			$('#' + data.id).on('click', function()
-			{
-				$('#message_input').val(data.command);
-			});
+			$('#list_irc').append('<a href="#" class="irc_action" id="' + data.id + '" title="' + data.name + ' - ' + data.command + '">' + (data.img != null ? '<img src="' + data.img + '" alt="" /> ' : '') + data.name + '</span>');
 		});
 	}
 
@@ -262,7 +249,29 @@ $(document).ready(function()
 	chat_ui.status_bar(status);
 
 	chat_ui.load_smilies();
+
+	//-- Handle IRC Commands
 	chat_ui.load_irc();
+	$('.irc_action').on('click', function(event)
+	{
+		event.preventDefault();
+
+		var command = $(this).attr('id');
+		command = command.replace('irc_', '');
+
+		if (command == 'leave') {
+			window.location = pc_script + '?action=user&perform=logout';
+		}
+
+		$.ajax({
+			url: pc_script + '?action=user&perform=status_update&ajax_connection=true',
+			type: 'POST',
+			data: {status: command}
+		});
+
+		chat_ui.status_bar(command);
+	});
+
 
 	chat_ui.bind_events();
 

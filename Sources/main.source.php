@@ -198,34 +198,34 @@ class SourceMain extends PureChat
 	private function load_irc_list()
 	{
 		PureChat::$globals['irc_commands'] = array(
-			0 => array(
+			array(
 				'name' => PureChat::$lang['available'],
 				'id' => 'irc_available',
 				'img' => $this->currentthemeurl . '/images/available.png',
-				'command' => '/available',
+				'command' => 'available',
 			),
-			1 => array(
+			array(
 				'name' => PureChat::$lang['busy'],
 				'id' => 'irc_busy',
 				'img' => $this->currentthemeurl . '/images/busy.png',
-				'command' => '/busy',
+				'command' => 'busy',
 			),
-			2 => array(
+			array(
 				'name' => PureChat::$lang['away'],
 				'id' => 'irc_away',
 				'img' => $this->currentthemeurl . '/images/away.png',
-				'command' => '/away',
+				'command' => 'away',
 			),
-			3 => array(
+			array(
 				'name' => PureChat::$lang['invisible'],
 				'id' => 'irc_invisible',
 				'img' => $this->currentthemeurl . '/images/invisible.png',
-				'command' => '/invisible',
+				'command' => 'invisible',
 			),
-			4 => array(
+			array(
 				'name' => PureChat::$lang['logout'],
 				'id' => 'irc_leave',
-				'command' => '/quit',
+				'command' => 'quit',
 				'img' => $this->currentthemeurl . '/images/leave.png',
 			),
 		);

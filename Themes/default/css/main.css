@@ -774,12 +774,13 @@ hr.sidebar_hr
 	padding: 10px 20px 10px 10px;
 	background: url(../images/pop_menu.png) no-repeat;
 }
-#list_irc span
+#list_irc a
 {
 	display: block;
 	margin: 3px 0;
 	padding: 0 8px;
 	color: #fff;
+	text-decoration: none;
 }
 
 .smily_link
